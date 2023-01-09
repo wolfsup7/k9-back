@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-wnm#)!1$&_tk59f(8-0+e08=3b=&5t58wrgsd8cuj*r_)yerli
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'mighty-river-12145.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', 'k9nails.herokuapp.com/']
 
 
 # Application definition
@@ -131,7 +131,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
