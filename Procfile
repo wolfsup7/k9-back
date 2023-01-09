@@ -1,1 +1,1 @@
-web: gunicorn k9-back.wsgi
+web: gunicorn django_rest_api.wsgi
