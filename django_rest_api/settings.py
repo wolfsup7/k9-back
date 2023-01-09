@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-wnm#)!1$&_tk59f(8-0+e08=3b=&5t58wrgsd8cuj*r_)yerli
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'k9nails.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', 'k9nails.herokuapp.com']
 
 
 # Application definition
