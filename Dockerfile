@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:experimental
-FROM python:3.7-alpine
+FROM python:18-alpine
 RUN --mount=type=cache,mode=0777,target=/root/.cache/pip pip install pyyaml
 
 COPY requirements.txt requirements.txt
