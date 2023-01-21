@@ -10,22 +10,15 @@ jobs:
       - checkout
       - python/install-packages:
           pkg-manager: pip
-      - python/install-packages:
-          pip-dependency-file: dev-requirements.txt
-          pkg-manager: pip
-      - python/install-packages:
-          args: pytest
-          pkg-manager: pip
-          pypi-cache: false
       - run:
-          name: Test
+          name: Run tests
           command: python -m pytest
       - persist_to_workspace:
           root: ~/project
           paths:
             - .
   deploy:
-    executor: heroku/default
+    executor: python/default
     steps:
       - attach_workspace:
         at: ~/project
