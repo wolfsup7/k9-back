@@ -6,10 +6,106 @@ orbs:
 jobs:
   build_and_test:
     executor: python/default
+    parameters:
+      app-dir:
+        default: ~/project
+        description: Path to the directory containing your python project. Not needed if dependency file lives in the root.
+        type: string
+      args:
+        default: ""
+        description: Arguments to pass to install command for pipenv and poetry. Override '-r requirements.txt' for pip.
+        type: string
+      cache-version:
+        default: v1
+        description: Change the default cache version if you need to clear the cache for any reason.
+        type: string
+      ensure-test-tool:
+        default: true
+        description: |
+          If true, a step will be ran to ensure the configured test tool is installed.
+        type: boolean
+      fail-if-missing-tool:
+        default: false
+        description: |
+          If true, this job will fail if the test tool was not found. If false, it will automatically install to recover.
+        type: boolean
+      include-branch-in-cache-key:
+        default: true
+        description: |
+          If true, this cache bucket will only apply to jobs within the same branch.
+        type: boolean
+      include-python-in-cache-key:
+        default: true
+        description: |
+            If true, this cache bucket will checksum the pyenv python version with the cache-key
+        type: boolean
+      module-src-dir:
+        default: src
+        description: Path relative to app-dir which contains module source.
+        type: string
+      pip-dependency-file:
+        default: requirements.txt
+        description: Name of the requirements file that needs to be installed with pip. Prepended with `app-dir`. If using pipenv or poetry, this is ignored.
+        type: string
+      pkg-manager:
+        default: auto
+        description: Select the package manager to use. Default is pip
+        enum:
+          - auto
+          - pip
+          - pipenv
+          - poetry
+          - pip-dist
+        type: enum
+      pre-install-steps:
+        default: []
+        description: |
+          Steps needed between restoring the cache and the install step.
+        type: steps
+      pypi-cache:
+        default: true
+        description: Keep all versions of pypi and site-package caches for faster rebuilding overall.
+        type: boolean
+      setup:
+        default: []
+        description: Provide any optional steps you would like to run prior to install the python project.
+        type: steps
+      setup-file-path:
+        default: ""
+        description: Path to the setup.py file.
+        type: string
+      test-tool:
+        default: pytest
+        description: The tool to run the tests with.
+        enum:
+          - pytest
+          - unittest
+        type: enum
+      test-tool-args:
+        default: ""
+        description: Arguments to pass to test tool, i.e. discovery settings for unittest - 'discover -s tests_dir'.
+        type: string
+      venv-cache:
+        default: true
+        description: Use the lockfile to cache the virtualenv. Not used with pip as pkg-manager.
+        type: boolean
+      version:
+        default: "3.8"
+        description: |
+          A full version tag must be specified. Example: "3.8"
+          or a full list of releases, see the following: https://hub.docker.com/r/cimg/python
+          type: string
     steps:
       - checkout
       - python/install-packages:
           pkg-manager: pip
+            - python/install-packages:
+          pip-dependency-file: dev-requirements.txt
+          pkg-manager: pip
+      - python/install-packages:
+          args: pytest
+          pkg-manager: pip
+          pypi-cache: false
       - run:
           name: Run tests
           command: python -m pytest
