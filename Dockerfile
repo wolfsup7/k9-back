@@ -1,12 +1,12 @@
-# syntax = docker/dockerfile:experimental
-FROM python:18-alpine
+# syntax = docker/dockerfile
+FROM python:3.11.1-alpine3.17
 RUN --mount=type=cache,mode=0777,target=/root/.cache/pip pip install pyyaml
 
 COPY requirements.txt requirements.txt
 
 
-COPY . code
-WORKDIR /code
+COPY ./ ./
+WORKDIR /manage.py
 
 EXPOSE 8000
 
