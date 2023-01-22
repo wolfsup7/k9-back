@@ -81,8 +81,7 @@ RUN set -eux; \
 	; \
 	make install; \
 	\
-# https://github.com/docker-library/python/issues/784
-# prevent accidental usage of a system installed libpython of the same version
+
 	bin="$(readlink -vf /usr/local/bin/python3)"; \
 	patchelf --set-rpath '$ORIGIN/../lib' "$bin"; \
 	\
