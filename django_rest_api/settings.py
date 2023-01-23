@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-wnm#)!1$&_tk59f(8-0+e08=3b=&5t58wrgsd8cuj*r_)yerli
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'k9nails.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', 'k9nails.herokuapp.com']
 
 
 # Application definition
@@ -86,10 +86,10 @@ WSGI_APPLICATION = 'django_rest_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ.get('DB_HOST'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASS'),
+        'NAME': 'clients_api',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': 'localhost'
     }
 }
 
